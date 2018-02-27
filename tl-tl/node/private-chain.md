@@ -4,7 +4,7 @@ Sa nakaraang pagtuturo, natutunan mo kung paano i-setup at i-deploy ang isang no
  
 Ang pag-deploy ng pribadong chain ng NEO ay nangangailangan ng hindi bababa sa apat na server upang maabot ang consensus, kung saan ang bawat server ay tumutugma sa consensus node at dedikadong NEO wallet.
 
-## 1. Cofigurasyon sa Virtual machine
+## 1. Configuration sa Virtual machine
 
 Ang pag-deploy sa NEO pribadong chain ay nanganga-ilangan ng apat na server para maabot ang consensus, kung saan ang bawat server tutugma sa consensus node. Para sa layunin na ma ipakita, Gumawa ako ng apat na Windows virtual machine ng Azure, ang sukat ay Standard DS1 v2 (1 core, 3.5 GB RAM). Magagawa mong i-deploy ang pribadong chain sa LAN o virtual machine.
 
@@ -12,7 +12,7 @@ Ang pag-deploy sa NEO pribadong chain ay nanganga-ilangan ng apat na server para
 
 Pagkatapos gumawa, buksan 10331-10334 port, ang tiyak na pamamaraan para sa sistema sa `firewall` `advanced setting` `inbound rules`, para magtatag ng bagong panuntunan , at e-add ang port 10331-10334.
 
-> [!Note]
+> [!Tandaan]
 > Kung lilikha ka ng virtual machine sa cloud server, mag log in sa virtual machine's administrative background, 
 mag-set up ng network security group 
 >
@@ -40,7 +40,7 @@ Buksan ang configuration file ng node `protocol.json`.
 
 First modify the `Magic` value. Magic is used to identify the source network of the message, and specifying a different Magic ensures that different network information in the NEO block are not sent to other networks, during transmission.
 Una baguhin ang halaga ng `Magic`.Ang Magic ay ginagamit upang ma kilala ang pinagmulang network ng mensahe, at kung iba ang Magic 
-> [!Note]
+> [!Tandaan]
 > Ang uri ng Magic ay unit, tandaan na ang halaga na iyong ilalagay ay magsisimula sa [0 - 4294967295].
 
 Baguhin ang `StandbyValidators`, at ilagay dito ang apat na public keys na ine-record sa pangatlong hakbang.
