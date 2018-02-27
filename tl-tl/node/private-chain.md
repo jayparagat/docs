@@ -26,7 +26,7 @@ Ang proseso ng pag-install sa NEO node ay inilarawan sa mga detalye sa itaas. Ti
 
 ## 3. Gumawa ng wallet 
 
-Una, may ginawa na tayong apat na wallet files, ito ay ang wallet1.db3 - wallet4.db3. Dito pwede e-execute sa parehong PC bersyon ng wallet at sa command line wallet, kung saan ang sumusunod na figure ay screenshot ng command line client.
+Una, may ginawa na tayong apat na wallet files, ito ay ang wallet1.db3 - wallet4.db3. Dito pwede e-execute sa wallet sa bersyon ng PC at sa command line wallet, kung saan ang sumusunod na figure ay screenshot ng command line client.
   
 ![image](/assets/privatechain_3.png)
 
