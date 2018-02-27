@@ -1,50 +1,51 @@
-# Build a private chain with a NEO node
+# Gumawa ng pribadong chain na may NEO node
 
-In a previous tutorial, you learned how to setup and deploy a node on Windows and Linux. This tutorial will teach you how to build a private chain and the steps needed to extract NEO and GAS from these private chains.
+Sa nakaraang pagtuturo, natutunan mo kung paano i-setup at i-deploy ang isang node sa Windows at Linux. Ituturo sa iyo ng tutorial na ito kung paano bumuo ng isang pribadong chain at ang mga hakbang na kinakailangan upang kunin ang NEO at GAS mula sa mga pribadong chain.
+ 
+Ang pag-deploy ng pribadong chain ng NEO ay nangangailangan ng hindi bababa sa apat na server upang maabot ang consensus, kung saan ang bawat server ay tumutugma sa consensus node at dedikadong NEO wallet.
 
-The deployment of an NEO private chain requires at least four servers to reach a consensus, where each server corresponds to a consensus node and a dedicated NEO wallet.
+## 1. Cofigurasyon sa Virtual machine
 
-## 1. Configuration of the virtual machine
+Ang pag-deploy sa NEO pribadong chain ay nanganga-ilangan ng apat na server para maabot ang consensus, kung saan ang bawat server tutugma sa consensus node. Para sa layunin na ma ipakita, Gumawa ako ng apat na Windows virtual machine ng Azure, ang sukat ay Standard DS1 v2 (1 core, 3.5 GB RAM). Magagawa mong i-deploy ang pribadong chain sa LAN o virtual machine.
 
-The deployment of an NEO private chain requires at least four servers to reach a consensus, where each server corresponds to a consensus node. For demonstration purposes, I have created four Windows virtual machines on Azure, the size is Standard DS1 v2 (1 core, 3.5 GB RAM). You will be able to deploy private chains on a LAN or virtual machine.
+ ![image](/assets/privatechain_1.png)
 
-![image](/assets/privatechain_1.png)
-
-After creating, to open 10331-10334 port, the specific method for the system in the `firewall` `advanced setting` `inbound rules`, to establish new rules, and then add port 10331-10334.
+Pagkatapos gumawa, buksan 10331-10334 port, ang tiyak na pamamaraan para sa sistema sa `firewall` `advanced setting` `inbound rules`, para magtatag ng bagong panuntunan , at e-add ang port 10331-10334.
 
 > [!Note]
-> If you create a virtual machine on a cloud server, log in to the virtual machine's administrative background, set up a network security group.
+> Kung lilikha ka ng virtual machine sa cloud server, mag log in sa virtual machine's administrative background, 
+mag-set up ng network security group 
 >
-> Azure setup method is: `network interface` `network security group` `inbound security rules` `add` add port 10331-10334.
+> Azure setup method ay: `network interface` `network security group` `inbound security rules` `add` add port 10331-10334.
 
-Once the virtual machine has been created, save the IP addresses of the four virtual machines for later use.
+Kapag na likha na ang virtual machine, i-save ang IP addresses sa apat na virtual machines para magamit kalaunan.
 
-## 2. Installation of the NEO node
+## 2. Instulasyon ng NEO node
 
-The installation process of the NEO node has been described in details above. Please refer to these installation instructions (setup.md).
+Ang proseso ng pag-install sa NEO node ay inilarawan sa mga detalye sa itaas. Tingnan dito ang instraksyon ng pag-install (setup.md). 
 
-## 3. Create a wallet
+## 3. Gumawa ng wallet 
 
-First, we have created four wallet files, namely wallet1.db3 - wallet4.db3. This step can be executed in both the PC version of the wallet and the command line wallet, where the following figure is a screenshot of the command line client.
-
+Una, may ginawa na tayong apat na wallet files, ito ay ang wallet1.db3 - wallet4.db3. Dito pwede e-execute sa parehong PC bersyon ng wallet at sa command line wallet, kung saan ang sumusunod na figure ay screenshot ng command line client.
+  
 ![image](/assets/privatechain_3.png)
 
-Once a wallet has been created and its corresponding public key saved, (i.e. saved to a txt file), directly copy the public key or use the `list key` command in [CLI Command](cli.md) to view the public key, and then copy it.
+Kapag nagawa na ang wallet at ang na i-save na tugmang public key, (i.e. saved to a txt file), direktang kopyahin ang public key o kaya gamitin ang `list key` i-command sa [CLI Command](cli.md) para makita ang public key, at kopyahin ito.
+       
+Pagkatapos, kopyahin ang apat na wallet patungo sa apat na virtual machine node na direktoryo.
 
-Afterwards, copy the four wallets to the four virtual machine node directory.
+## 4. Baguhin ang configuration file ng node 
 
-## 4. Modify the node's configuration file
-
-Open the node's configuration file `protocol.json`.
+Buksan ang configuration file ng node `protocol.json`. 
 
 First modify the `Magic` value. Magic is used to identify the source network of the message, and specifying a different Magic ensures that different network information in the NEO block are not sent to other networks, during transmission.
-
+Una baguhin ang halaga ng `Magic`.Ang Magic ay ginagamit upang ma kilala ang pinagmulang network ng mensahe, at kung iba ang Magic 
 > [!Note]
-> The type of Magic is unit, so note that the value you fill in is in the range [0 - 4294967295].
+> Ang uri ng Magic ay unit, tandaan na ang halaga na iyong ilalagay ay magsisimula sa [0 - 4294967295].
 
-Modify the `StandbyValidators`, and fill in the 4 public keys recorded in step 3, here.
+Baguhin ang `StandbyValidators`, at ilagay dito ang apat na public keys na ine-record sa pangatlong hakbang.
 
-Finally modify the `SeedList`, fill in the IP address recorded in the first step, and the port number remains unchanged. For example, I modified the following configuration.
+Panghuli baguhin ang `SeedList` ilagay ang IP address na na-irekord  sa una hakbang, at ang port number. Halimbawa, ang sumusunod na configuration ay aking binago..
 
 ```json
 {
